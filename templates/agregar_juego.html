@@ -1,0 +1,44 @@
+{% extends "plantilla.html" %}
+{% block titulo %} Nuevo Juego {% endblock %}
+
+{% block contenido %}
+<section class="section">
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <h3 class="title is-3">Agregar nuevo juego</h3>
+
+            <form action="{{ url_for('guardar') }}" method="POST">
+                <div class="field">
+                    <label class="label">Nombre del videojuego:</label>
+                    <div class="control">
+                        <input name="nombre" class="input" type="text" placeholder="Ej. Silent Hill 2" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Descripción:</label>
+                    <div class="control">
+                        <textarea name="descripcion" class="textarea" placeholder="¿De qué trata el juego?" required></textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Precio ($):</label>
+                    <div class="control">
+                        <input name="precio" class="input" type="number" step="0.01" placeholder="29.99" required>
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button type="submit" class="button is-success">Guardar en Base de Datos</button>
+                    </div>
+                    <div class="control">
+                        <a href="{{url_for('index')}}" class="button is-light">Volver</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

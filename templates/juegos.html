@@ -1,0 +1,40 @@
+{% extends "plantilla.html" %}
+{% block titulo %} Lista de Juegos {% endblock %}
+
+{% block contenido %}
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-3">Juegos registrados</h3>
+            <a href="{{ url_for('formulario_agregar_juego') }}" class="button is-success">Agregar nuevo juego</a>
+
+            <table class="table is-fullwidth is-striped mt-4">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for juego in juegos %}
+                    <tr>
+                        <td>{{ juego.nombre }}</td>
+                        <td>{{ juego.descripcion }}</td>
+                        <td>${{ juego.precio }}</td>
+                        <td>
+                            <div class="buttons">
+                                <a href="{{ url_for('editar', id=juego.id) }}" class="button is-info is-small">Editar</a>
+
+                                <a href="{{ url_for('eliminar', id=juego.id) }}" class="button is-danger is-small">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
