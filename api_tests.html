@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+### 1. Obtener la lista de juegos (Debería dar 200 OK)
+GET http://127.0.0.1:5000/api/juegos
+Accept: application/json
+
+###
+
+### 2. Crear un juego nuevo (Debería dar 201 Created)
+POST http://127.0.0.1:5000/api/juegos
+Content-Type: application/json
+
+{
+  "nombre": "The Legend of Zelda",
+  "descripcion": "Juego de aventura y exploración",
+  "precio": 59.99
+}
+
+###
+
+### 3. Obtener un juego específico (Cambia el "1" por un ID que sepas que existe)
+GET http://127.0.0.1:5000/api/juegos/1
+Accept: application/json
+
+###
+
+### 4. Modificar un juego existente (Cambia el "1" por un ID real)
+PUT http://127.0.0.1:5000/api/juegos/1
+Content-Type: application/json
+
+{
+  "nombre": "The Legend of Zelda: Editado",
+  "descripcion": "Descripción actualizada desde la API",
+  "precio": 69.99
+}
+
+###
+
+### 5. Eliminar un juego (Cambia el "1" por el ID que quieras borrar) (Debería dar 204 No Content)
+DELETE http://127.0.0.1:5000/api/juegos/1
+
+###
+
+### 6. Petición inválida / Error (Debería dar 404 Not Found)
+GET http://127.0.0.1:5000/api/juegos/99999
+Accept: application/json
+</body>
+</html>
