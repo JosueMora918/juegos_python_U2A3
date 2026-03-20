@@ -2,10 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for
 from models import db, Juego, User
 import controllers
 from flask_login import LoginManager, login_required
+from flask_restful import Api
+from api.routes import JuegoList, JuegoResource
 
 app = Flask(__name__)
-# ¡Importante! Configura una clave secreta para las sesiones y CSRF de los formularios
-app.config['SECRET_KEY'] = 'mi_clave_secreta_super_segura_123'
+api = Api(app)
+app.config['SECRET_KEY'] = '1234'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/juegos'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -66,6 +68,9 @@ def actualizar():
 def eliminar(id):
     controllers.eliminar_juego(id)
     return redirect(url_for('index'))
+
+api.add_resource(JuegoList, '/api/juegos')
+api.add_resource(JuegoResource, '/api/juegos/<int:id>')
 
 if __name__ == '__main__':
     with app.app_context():
