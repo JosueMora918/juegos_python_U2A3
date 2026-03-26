@@ -1,0 +1,13 @@
+{% extends 'plantilla.html' %}
+{% block titulo %}Página no encontrada{% endblock %}
+{% block contenido %}
+<section class="hero is-danger is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title is-1">404</h1>
+            <p class="subtitle">No se encontró ésta página.</p>
+            <a href="{{ url_for('index') }}" class="button is-white is-outlined">Regresar</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

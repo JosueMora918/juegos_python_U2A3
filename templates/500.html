@@ -1,0 +1,13 @@
+{% extends 'plantilla.html' %}
+{% block titulo %}Error Interno{% endblock %}
+{% block contenido %}
+<section class="hero is-black is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title is-1">500</h1>
+            <p class="subtitle">Algo se rompió en nuestro servidor. Ya estamos trabajando en ello.</p>
+            <a href="{{ url_for('index') }}" class="button is-danger">Sacarme de aquí</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

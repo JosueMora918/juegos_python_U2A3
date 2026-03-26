@@ -1,0 +1,13 @@
+{% extends 'plantilla.html' %}
+{% block titulo %}Error 400{% endblock %}
+{% block contenido %}
+<section class="hero is-warning is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title is-1">400</h1>
+            <p class="subtitle">No podemos procesar esa solicitud.</p>
+            <a href="{{ url_for('index') }}" class="button is-dark">Volver al Inicio</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

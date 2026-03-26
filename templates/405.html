@@ -1,0 +1,13 @@
+{% extends 'plantilla.html' %}
+{% block titulo %}Error 405{% endblock %}
+{% block contenido %}
+<section class="hero is-info is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title is-1">405</h1>
+            <p class="subtitle"><strong>Método no permitido.</strong> Estás intentando acceder de una forma no válida para esta página.</p>
+            <a href="{{ url_for('index') }}" class="button is-white is-outlined">Regresar al inicio</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

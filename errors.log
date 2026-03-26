@@ -1,0 +1,19 @@
+2026-03-26 01:13:01,095 - app - ERROR - Intento de acceso con ID inválido: 0
+2026-03-26 01:13:25,528 - app - ERROR - Intento de acceso con ID inválido: 0
+2026-03-26 01:19:31,233 - app - ERROR - Exception on /error-forzado [GET]
+Traceback (most recent call last):
+  File "C:\Users\Admin\PycharmProjects\juegos_python\.venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Admin\PycharmProjects\juegos_python\.venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Admin\PycharmProjects\juegos_python\.venv\Lib\site-packages\flask_restful\__init__.py", line 298, in error_router
+    return original_handler(e)
+  File "C:\Users\Admin\PycharmProjects\juegos_python\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Admin\PycharmProjects\juegos_python\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Admin\PycharmProjects\juegos_python\app.py", line 59, in error_forzado
+    return 1 / 0
+           ~~^~~
+ZeroDivisionError: division by zero
