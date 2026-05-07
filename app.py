@@ -1,3 +1,4 @@
+import os
 import logging
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from flask_login import LoginManager, login_required, current_user
@@ -7,6 +8,7 @@ from models import db, User
 import controllers
 from api.routes import JuegoList, JuegoResource
 from auth import auth as auth_blueprint
+
 app = Flask(__name__)
 api = Api(app)
 
@@ -17,7 +19,16 @@ file_handler.setFormatter(formatter)
 app.logger.addHandler(file_handler)
 
 app.config['SECRET_KEY'] = '1234'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/juegos'
+
+# --- INICIO DEL CAMBIO ---
+# Si el código detecta que está en GitHub Actions, usa SQLite en memoria
+if os.environ.get('GITHUB_ACTIONS') == 'true':
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+else:
+    # Si no, usa tu conexión local normal de MySQL
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/juegos'
+# --- FIN DEL CAMBIO ---
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
