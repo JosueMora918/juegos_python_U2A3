@@ -1,11 +1,9 @@
 import os
-import time
 import logging
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from flask_login import LoginManager, login_required, current_user
 from flask_restful import Api
 from werkzeug.exceptions import HTTPException, BadRequest, MethodNotAllowed
-from sqlalchemy.exc import OperationalError
 from models import db, User
 import controllers
 from api.routes import JuegoList, JuegoResource
@@ -25,6 +23,7 @@ app.config['SECRET_KEY'] = '1234'
 if os.environ.get('GITHUB_ACTIONS') == 'true':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 else:
+    # Cambie a db porque usamos docker, cambiar a localhost luego
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@db/juegos'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -101,7 +100,7 @@ def guardar():
     precio = request.form.get('precio')
 
     if not nombre or not precio:
-        abort(400)
+        abort(400)  # Bad Request si faltan datos obligatorios
 
     controllers.insertar_juego(nombre, descripcion, precio)
     return redirect(url_for('index'))
@@ -134,22 +133,9 @@ def eliminar(id):
     controllers.eliminar_juego(id)
     return redirect(url_for('index'))
 
-
-# Crear tablas con reintentos (necesario tanto en Docker como con __main__)
-with app.app_context():
-    for intento in range(10):
-        try:
-            db.create_all()
-            print("Base de datos lista.")
-            break
-        except OperationalError:
-            print(f"DB no lista, reintentando ({intento + 1}/10)...")
-            time.sleep(3)
-    else:
-        print("No se pudo conectar a la base de datos después de 10 intentos.")
-
-
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    with app.app_context():
+        db.create_all()
+    app.run(debug=False, port=5000)
 
     # Comentario para probar los actions
